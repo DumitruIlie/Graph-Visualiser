@@ -82,7 +82,20 @@ bool Graph::render(int window, std::ostream& errorStream) const
 
 void Graph::processMouseInput(vec2i prev, vec2i curr, bool pressed)
 {
-	// TODO: Implement this
+	int i, N = (int)positions.size();
+
+	if(pressed)
+	{
+		for(i = 0;i < N;++i)
+		{
+			// TODO: factor out the radius of the node
+			if((positions[i] - prev).lengthSquared() < 16 * 16)
+			{
+				positions[i] += curr - prev;
+				break;
+			}
+		}
+	}
 }
 
 void Graph::reset()

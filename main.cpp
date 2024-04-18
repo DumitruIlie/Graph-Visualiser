@@ -14,6 +14,7 @@ int main()
 	int window = initwindow(WindowWidth, WindowHeight, "Graph Visualiser", -3, -26, true);
 	bool appRunning = true;
 	Graph G;
+	vec2i prevMouse, currMouse;
 
 	if(!G.loadFromFile("graph.in"))
 	{
@@ -22,6 +23,8 @@ int main()
 	}
 
 	G.initPositions(vec2i(WindowWidth / 2, WindowHeight / 2), 100, true);
+	currMouse.x = mousex();
+	currMouse.y = mousey();
 
 	do
 	{
@@ -29,6 +32,11 @@ int main()
 
 		setbkcolor(WHITE);
 		cleardevice();
+
+		prevMouse = currMouse;
+		currMouse.x = mousex();
+		currMouse.y = mousey();
+		G.processMouseInput(prevMouse, currMouse, isKeyPressed(VK_LBUTTON));
 
 		if(!G.render(window))
 			appRunning = false;
