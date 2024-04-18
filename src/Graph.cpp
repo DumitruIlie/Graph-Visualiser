@@ -4,6 +4,8 @@
 #include<fstream>
 #include<graphics.h>
 
+int Graph::nodeRadius = 16;
+
 bool Graph::loadFromFile(const std::string& fileName, std::ostream& errorStream)
 {
 	std::ifstream in(fileName.c_str());
@@ -69,8 +71,7 @@ bool Graph::render(int window, std::ostream& errorStream) const
 
 	for(i = 0;i < N;++i)
 	{
-		// TODO: factor out the radius of the node
-		fillellipse(positions[i].x, positions[i].y, 16, 16);
+		fillellipse(positions[i].x, positions[i].y, nodeRadius, nodeRadius);
 
 		std::stringstream label;
 		label << i;
@@ -88,8 +89,7 @@ void Graph::processMouseInput(vec2i prev, vec2i curr, bool pressed)
 	{
 		for(i = 0;i < N;++i)
 		{
-			// TODO: factor out the radius of the node
-			if((positions[i] - prev).lengthSquared() < 16 * 16)
+			if((positions[i] - prev).lengthSquared() < nodeRadius * nodeRadius)
 			{
 				positions[i] += curr - prev;
 				break;

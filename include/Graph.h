@@ -14,6 +14,7 @@ class Graph
 public:
 	std::vector<std::vector<int> > edges;
 	std::vector<vec2i> positions;
+	static int nodeRadius;
 
 	/** Loads the graph from a file. This function will change in the future based on graph file representation
 	  * @param errorStream - In case of errors the error is specified by writing to the stream
