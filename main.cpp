@@ -36,9 +36,10 @@ int main()
 		prevMouse = currMouse;
 		currMouse.x = mousex();
 		currMouse.y = mousey();
+
 		G.processMouseInput(prevMouse, currMouse, isKeyPressed(VK_LBUTTON));
 
-		if(!G.render(window))
+		if(!G.render(window, currMouse))
 			appRunning = false;
 
 		swapbuffers();

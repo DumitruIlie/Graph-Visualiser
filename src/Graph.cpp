@@ -2,7 +2,6 @@
 #include"Graph.h"
 #include<cmath>
 #include<fstream>
-#include<graphics.h>
 
 int Graph::nodeRadius = 16;
 
@@ -46,7 +45,7 @@ bool Graph::loadFromFile(const std::string& fileName, std::ostream& errorStream)
 	return true;
 }
 
-bool Graph::render(int window, std::ostream& errorStream) const
+bool Graph::render(int window, vec2i mousePos, int HOVER_COLOR, std::ostream& errorStream) const
 {
 	int i, j, N = (int)positions.size();
 
@@ -71,6 +70,16 @@ bool Graph::render(int window, std::ostream& errorStream) const
 
 	for(i = 0;i < N;++i)
 	{
+		if((positions[i] - mousePos).lengthSquared() < nodeRadius * nodeRadius)
+		{
+			setfillstyle(1, HOVER_COLOR);
+			setbkcolor(HOVER_COLOR);
+		}
+		else
+		{
+			setfillstyle(1, WHITE);
+			setbkcolor(WHITE);
+		}
 		fillellipse(positions[i].x, positions[i].y, nodeRadius, nodeRadius);
 
 		std::stringstream label;

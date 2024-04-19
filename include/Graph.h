@@ -3,6 +3,7 @@
 #define GRAPH_H
 
 #include<iostream>
+#include<graphics.h>
 #include<string>
 #include<vector>
 #include"vec2.h"
@@ -26,7 +27,7 @@ public:
 	  * @param errorStream - In case of errors the error is specified by writing to the stream
 	  * @return true if the graph was rendered or false on error
 	  */
-	bool render(int window, std::ostream& errorStream = std::cerr) const;
+	bool render(int window, vec2i mousePos, int HOVER_COLOR = COLOR(224, 224, 224), std::ostream& errorStream = std::cerr) const;
 
 	/** Processes the mouse movement which will move the nodes around. Currently not implemented.
 	  * @param prev - previous mouse coordinates
